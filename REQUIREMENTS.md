@@ -29,7 +29,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 - Table: Products (id: serial primary key, name: varchar(80), price: integer not null)
 - Table: Users (id: serial primary key, firstName: varchar(20) not null, latName: varchar(20) not null, password: varchar not null);
-- Table: Orders (id: serial primary key, productID: integer references productID, quantity: integer not null, userID: integer references userID, isComplete: boolean default false)
+- Table: Orders (id: serial primary key, productID: integer[Foreign key to products table], quantity: integer not null, userID: integer[Foreign key to user table], isComplete: boolean default false)
 
 #### Product
 
