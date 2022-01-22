@@ -1,1 +1,0 @@
-CREATE TABLE products (name VARCHAR(100), type VARCHAR(100), id SERIAl PRIMARY KEY);
