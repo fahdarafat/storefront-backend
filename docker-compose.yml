@@ -4,9 +4,11 @@ services:
   postgres:
     image: postgres
     ports:
-      - '5432:5432'
-    env_file:
-      - .env
+      - '2345:5432'
+    environment:
+      POSTGRES_USER: full_stack_user
+      POSTGRES_DB: storefront
+      POSTGRES_PASSWORD: password123
     volumes:
       - 'postgres:/var/lib/postgresql/data'
 
