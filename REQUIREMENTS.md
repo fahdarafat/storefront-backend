@@ -11,6 +11,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Index 'products' [GET]
 - Show 'products/:id' [GET]
 - Create [token required] 'products' [POST]
+- Delete 'products/:id' [DELETE]
 - [OPTIONAL] Top 5 most popular products 'products/top_five' [GET]
 - [OPTIONAL] Products by category (args: product category)
 
@@ -22,7 +23,11 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 #### Orders
 
-- Current Order by user (args: user id)[token required] 'users/:id/orders' [GET]
+- Index 'orders' [GET]
+- Show 'orders/:id' [GET]
+- Create 'orders' [POST]
+- Complete Order 'orders/:id/complete' [PUT]
+- Current Order by user (args: user id)[token required] 'orders/user/:user_id' [GET]
 - [OPTIONAL] Completed Orders by user (args: user id)[token required]
 
 ## Data Shapes
@@ -30,7 +35,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Table: Products (id: serial primary key, name: varchar(80), price: integer not null)
 - Table: Users (id: serial primary key, firstName: varchar(20) not null, latName: varchar(20) not null, password: varchar not null);
 - Table: Orders (id: serial primary key, userID: integer[Foreign key to user table], is_complete: boolean default false)
-- Table: Orders_Products(id: serial primary key, quantity: integer, order_id: integer [Foreign key to orders(id)], product_id: integer [Foreign key to products(id)])
+- Table: Order_Products(id: serial primary key, quantity: integer, order_id: integer [Foreign key to orders(id)], product_id: integer [Foreign key to products(id)])
 
 #### Product
 
@@ -49,7 +54,5 @@ These are the notes from a meeting with the frontend developer that describe wha
 #### Orders
 
 - id
-- id of each product in the order
-- quantity of each product in the order
 - user_id
 - status of order (active or complete)
