@@ -1,5 +1,6 @@
 import express from 'express'
 import {Product, ProductStore} from '../models/product'
+import authenticate from '../middleware/authenticate';
 
 const store = new ProductStore;
 
@@ -18,7 +19,7 @@ products.get('/:id',async (req:express.Request, res:express.Response) => {
         res.send(err);
     }
 })
-products.post('/', async (req:express.Request, res:express.Response) => {
+products.post('/', authenticate, async (req:express.Request, res:express.Response) => {
     const product = req.body;
     try {
         const result = await store.create(product);
@@ -27,7 +28,7 @@ products.post('/', async (req:express.Request, res:express.Response) => {
         res.send(err)
     }
 })
-products.delete('/:id', async (req:express.Request, res:express.Response) => {
+products.delete('/:id', authenticate, async (req:express.Request, res:express.Response) => {
     try {
         const id = req.params.id;
         const result = await store.delete(id);

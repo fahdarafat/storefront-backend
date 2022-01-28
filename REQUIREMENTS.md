@@ -11,7 +11,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Index 'products' [GET]
 - Show 'products/:id' [GET]
 - Create [token required] 'products' [POST]
-- Delete 'products/:id' [DELETE]
+- Delete 'products/:id' [token required] [DELETE]
 - [OPTIONAL] Top 5 most popular products 'products/top_five' [GET]
 - [OPTIONAL] Products by category (args: product category)
 

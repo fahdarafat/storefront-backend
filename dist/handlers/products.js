@@ -41,6 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 exports.__esModule = true;
 var express_1 = __importDefault(require("express"));
 var product_1 = require("../models/product");
+var authenticate_1 = __importDefault(require("../middleware/authenticate"));
 var store = new product_1.ProductStore;
 var products = express_1["default"].Router();
 products.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -75,7 +76,7 @@ products.get('/:id', function (req, res) { return __awaiter(void 0, void 0, void
         }
     });
 }); });
-products.post('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+products.post('/', authenticate_1["default"], function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var product, result, err_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -97,7 +98,7 @@ products.post('/', function (req, res) { return __awaiter(void 0, void 0, void 0
         }
     });
 }); });
-products["delete"]('/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+products["delete"]('/:id', authenticate_1["default"], function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var id, result, err_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
