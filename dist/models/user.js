@@ -102,8 +102,12 @@ var UserStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = "INSERT INTO users (firstName, lastName, password) VALUES($1, $2, $3) RETURNING *";
-                        return [4 /*yield*/, conn.query(sql, [user.firstName, user.lastName, user.password])];
+                        sql = "INSERT INTO users (firstname, lastname, password) VALUES($1, $2, $3) RETURNING *";
+                        return [4 /*yield*/, conn.query(sql, [
+                                user.firstname,
+                                user.lastname,
+                                user.password,
+                            ])];
                     case 2:
                         result = _a.sent();
                         conn.release();

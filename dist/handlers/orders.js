@@ -41,6 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 exports.__esModule = true;
 var express_1 = __importDefault(require("express"));
 var order_1 = require("../models/order");
+var authenticate_1 = __importDefault(require("../middleware/authenticate"));
 var store = new order_1.OrderStore;
 var orders = express_1["default"].Router();
 orders.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -82,7 +83,7 @@ orders.get('/:id', function (req, res) { return __awaiter(void 0, void 0, void 0
         }
     });
 }); });
-orders.get('/user/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+orders.get('/user/:id', authenticate_1["default"], function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var id, result, err_3;
     return __generator(this, function (_a) {
         switch (_a.label) {

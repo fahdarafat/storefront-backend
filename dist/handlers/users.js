@@ -44,9 +44,9 @@ var user_1 = require("../models/user");
 var authenticate_1 = __importDefault(require("../middleware/authenticate"));
 var hashPassword_1 = __importDefault(require("../middleware/hashPassword"));
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-var store = new user_1.UserStore;
+var store = new user_1.UserStore();
 var users = express_1["default"].Router();
-users.get('/', authenticate_1["default"], function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+users.get("/", authenticate_1["default"], function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var result, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -65,7 +65,7 @@ users.get('/', authenticate_1["default"], function (req, res) { return __awaiter
         }
     });
 }); });
-users.get('/:id', authenticate_1["default"], function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+users.get("/:id", authenticate_1["default"], function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var id, result, err_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -85,15 +85,15 @@ users.get('/:id', authenticate_1["default"], function (req, res) { return __awai
         }
     });
 }); });
-users.post('/', authenticate_1["default"], hashPassword_1["default"], function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+users.post("/", authenticate_1["default"], hashPassword_1["default"], function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var user, result, err_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 user = {
-                    firstName: req.body.firstName,
-                    lastName: req.body.lastName,
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname,
                     password: res.locals.password
                 };
                 return [4 /*yield*/, store.create(user)];
@@ -109,14 +109,14 @@ users.post('/', authenticate_1["default"], hashPassword_1["default"], function (
         }
     });
 }); });
-users.post('/signup', hashPassword_1["default"], function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+users.post("/signup", hashPassword_1["default"], function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var user, newUser, token, err_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 user = {
-                    firstName: req.body.firstName,
-                    lastName: req.body.lastName,
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname,
                     password: res.locals.password
                 };
                 if (!user) return [3 /*break*/, 4];
