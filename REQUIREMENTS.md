@@ -5,6 +5,22 @@ The company stakeholders want to create an online storefront to showcase their g
 These are the notes from a meeting with the frontend developer that describe what endpoints the API needs to supply, as well as data shapes the frontend and backend have agreed meet the requirements of the application.
 
 ## API Endpoints
+- First Endpoint required to get the token is `localhost:3000/users/signup` [POST]
+### Products
+- `localhost:3000/products` [GET]
+- `localhost:3000/products/:id` [GET]
+- `localhost:3000/products` [POST] [Token required]
+- `localhost:3000/products/:id` [Delete]
+### Users
+- `localhost:3000/users` [GET] [Token required]
+- `localhost:3000/users/:id` [GET] [Token required]
+- `localhost:3000/users` [POST] [Token required]
+### Orders
+- `localhost:3000/orders` [GET]
+- `localhost:3000/orders/:id` [GET]
+- `localhost:3000/orders` [POST]
+- `localhost:3000/orders/:id/complete` [PUT]
+- `localhost:3000/orders/user/:user_id` [GET] [Token required]
 
 #### Products
 

@@ -1,5 +1,3 @@
-# Storefront Backend Project
-
 ## Project Setup
 ### Run The following steps in order.
 - `npm install` To install project dependencies
@@ -24,6 +22,7 @@ TOKEN_SECRET=secrettokentokensecret
 ENV=dev
 ```
 - Note that the container is being forwarded to PORT 2345, To avoid any collision if you have a local installation of Postgres.
+- The Server is running on PORT 3000.
 - Now run the migrations with `db-migrate up`.
 - Run the server using `npm run start`.
 - You are now ready to start testing the endpoints.

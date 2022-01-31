@@ -16,12 +16,7 @@ describe("User Model", () => {
     expect(result.firstname).toEqual("Fahd");
   });
   it("Show method should return user when given an ID", async () => {
-    const result = await store.show(1);
-    expect(result).toEqual({
-      id: 1,
-      firstname: "Fahd",
-      lastname: "Arafat",
-      password: "password"
-    })
+    const result = await store.show(2);
+    expect(result.firstname).toEqual('Fahd')
   })
 });

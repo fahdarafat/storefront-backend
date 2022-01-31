@@ -21,9 +21,9 @@ users.get("/:id", authenticate, async (req: express.Request, res: express.Respon
   if (id) {
     try {
       const result = await store.show(id);
-      res.status(200).json(result).end();
+      res.status(200).json(result);
     } catch (err) {
-      res.status(400).send(err).end();
+      res.status(400).send(err);
     }
   } else {
     res.send('Please enter a number for user id')
@@ -38,9 +38,9 @@ users.post("/", authenticate, hashPassword, async (req: express.Request, res: ex
       password: res.locals.password,
     };
     const result = await store.create(user);
-    res.status(200).json(result).end();
+    res.status(200).json(result);
   } catch (err) {
-    res.status(400).send(err).end();
+    res.status(400).send(err);
   }
 }
 );
