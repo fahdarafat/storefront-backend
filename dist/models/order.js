@@ -102,7 +102,7 @@ var OrderStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'INSERT INTO orders (user_id) VALUES ($1)RETURNING *';
+                        sql = 'INSERT INTO orders (user_id) VALUES ($1) RETURNING *';
                         return [4 /*yield*/, conn.query(sql, [order.userID])];
                     case 2:
                         result = _a.sent();

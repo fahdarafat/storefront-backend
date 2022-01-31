@@ -15,9 +15,13 @@ orders.get('/', async (req: express.Request, res: express.Response) => {
 })
 orders.get('/:id', async (req: express.Request, res: express.Response) => {
     try {
-        const id: string = req.params.id
-        const result = await store.show(id);
-        res.status(200).json(result);
+        const id: Order["id"] = parseInt(req.params.id) ? parseInt(req.params.id) : undefined
+        if (id) {
+            const result = await store.show(id);
+            res.status(200).json(result);
+        } else {
+            res.send('Please provide user id as a number');
+        }
     } catch (err) {
         res.status(400).send(err);
     }

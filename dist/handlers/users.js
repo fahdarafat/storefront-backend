@@ -70,18 +70,25 @@ users.get("/:id", authenticate_1["default"], function (req, res) { return __awai
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                id = req.params.id;
-                return [4 /*yield*/, store.show(id)];
+                id = parseInt(req.params.id) ? parseInt(req.params.id) : undefined;
+                if (!id) return [3 /*break*/, 5];
+                _a.label = 1;
             case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, store.show(id)];
+            case 2:
                 result = _a.sent();
                 res.status(200).json(result).end();
-                return [3 /*break*/, 3];
-            case 2:
+                return [3 /*break*/, 4];
+            case 3:
                 err_2 = _a.sent();
                 res.status(400).send(err_2).end();
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 4];
+            case 4: return [3 /*break*/, 6];
+            case 5:
+                res.send('Please enter a number for user id');
+                _a.label = 6;
+            case 6: return [2 /*return*/];
         }
     });
 }); });

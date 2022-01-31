@@ -6,11 +6,14 @@ describe('Order Model', () => {
     it("Should have an index method", () => {
         expect(store.index).toBeDefined();
     });
-    it("Show method should not return order with user_id abc", async () => {
-        const result = await store.show('1')
+    it("Should have a create method", () => {
+        expect(store.create).toBeDefined();
+    });
+    it("Show method should not return order if it doesn't exist", async () => {
+        const result = await store.show(1)
         expect(result).not.toEqual({
             is_complete: true,
-            userID: 'abc'
+            userID: 1
         });
     })
     it("ShowById should be falsy when given invalid user id", async () => {

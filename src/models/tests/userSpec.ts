@@ -15,4 +15,13 @@ describe("User Model", () => {
     const result = await store.create(user);
     expect(result.firstname).toEqual("Fahd");
   });
+  it("Show method should return user when given an ID", async () => {
+    const result = await store.show(1);
+    expect(result).toEqual({
+      id: 1,
+      firstname: "Fahd",
+      lastname: "Arafat",
+      password: "password"
+    })
+  })
 });

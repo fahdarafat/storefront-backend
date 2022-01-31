@@ -3,7 +3,7 @@ import client from "../database";
 export type Order = {
     id?: number,
     is_complete?: boolean,
-    userID: string,
+    userID: number | undefined,
 }
 export class OrderStore {
     async index(): Promise<Order[]> {
@@ -17,7 +17,7 @@ export class OrderStore {
             throw new Error(`Could not get orders: ${err}`);
         }
     }
-    async show(id: string): Promise<Order> {
+    async show(id: Order["id"]): Promise<Order> {
         try {
             const conn = await client.connect();
             const sql = 'SELECT * FROM orders WHERE id=($1)';
@@ -31,7 +31,7 @@ export class OrderStore {
     async create(order: Order): Promise<Order> {
         try {
             const conn = await client.connect();
-            const sql = 'INSERT INTO orders (user_id) VALUES ($1)RETURNING *';
+            const sql = 'INSERT INTO orders (user_id) VALUES ($1) RETURNING *';
             const result = await conn.query(sql, [order.userID]);
             conn.release();
             return result.rows[0];

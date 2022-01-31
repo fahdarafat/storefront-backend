@@ -17,12 +17,16 @@ users.get("/", authenticate, async (req: express.Request, res: express.Response)
 }
 );
 users.get("/:id", authenticate, async (req: express.Request, res: express.Response): Promise<void> => {
-  try {
-    const id = req.params.id;
-    const result = await store.show(id);
-    res.status(200).json(result).end();
-  } catch (err) {
-    res.status(400).send(err).end();
+  const id: number | undefined = parseInt(req.params.id) ? parseInt(req.params.id) : undefined
+  if (id) {
+    try {
+      const result = await store.show(id);
+      res.status(200).json(result).end();
+    } catch (err) {
+      res.status(400).send(err).end();
+    }
+  } else {
+    res.send('Please enter a number for user id')
   }
 }
 );

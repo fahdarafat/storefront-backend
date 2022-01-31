@@ -18,7 +18,7 @@ export class ProductStore {
             throw new Error(`Cannot get products ${err}`)
         }
     }
-    async show(id: string): Promise<Product> {
+    async show(id: number): Promise<Product> {
         try {
             const conn = await client.connect();
             const sql = 'SELECT * FROM products WHERE id=($1)';
@@ -40,9 +40,9 @@ export class ProductStore {
             throw new Error(`Cannot add new product ${product.name}. Error ${err}`)
         }
     }
-    async delete(id: string): Promise<Product> {
+    async delete(id: number): Promise<Product> {
         try {
-            const sql = 'DELETE FROM products WHERE id=($1)';
+            const sql = 'DELETE FROM products WHERE id=($1) RETURNING *';
             const conn = await client.connect();
             const result = await conn.query(sql, [id]);
             const product = result.rows[0];

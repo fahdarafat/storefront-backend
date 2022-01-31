@@ -1,57 +1,37 @@
 # Storefront Backend Project
 
-## Getting Started
+## Project Setup
+### Run The following steps in order.
+- `npm install` To install project dependencies
+- `docker-compose up` To spin up the docker container for Postgres.
+- `docker ps` This will give you the container ID. (Copy this ID).
+- `docker exec it <containerID> bash` This will open the cli for the container.
+- In the newly opened terminal run `psql -U postgres`.
+- Now run `CREATE USER <username> WITH PASSWORD '<password>';`This will create the user you will need in the .env file.
+- Running `\l` , you should see a db called 'storefront' and 'storefront_test'.
+- `\c storefront GRANT ALL PRIVILEGES ON DATABASE storefront TO <your username>;` Run this command again for 'storefront_test'.
+- Now create a `.env` file with the following structure. And replace the '*******' with your username and password.
+```
+POSTGRES_HOST=localhost
+POSTGRES_DB=storefront
+POSTGRES_DB_TEST=storefront_test
+POSTGRES_PORT=2345
+POSTGRES_USER=********
+POSTGRES_PASSWORD=********
+SALT_ROUNDS=10
+BCRYPT_SECRET=kapowkapow42
+TOKEN_SECRET=secrettokentokensecret
+ENV=dev
+```
+- Note that the container is being forwarded to PORT 2345, To avoid any collision if you have a local installation of Postgres.
+- Now run the migrations with `db-migrate up`.
+- Run the server using `npm run start`.
+- You are now ready to start testing the endpoints.
 
-This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `yarn` in your terminal at the project root.
+## Testing
+### `db-migrate --env test up && cross-env ENV=test jasmine-ts && db-migrate --env test reset`
+- You can run the tests using `npm run test` and it will run the script above.
+- It runs the migrations on the storefront_test DB  and then it sets the environment to test using the cross-env package. It then runs all the tests using Jasmine, finally it resets the migrations to clean up the test DB.
 
-## Required Technologies
-
-Your application must make use of the following libraries:
-
-- Postgres for the database
-- Node/Express for the application logic
-- dotenv from npm for managing environment variables
-- db-migrate from npm for migrations
-- jsonwebtoken from npm for working with JWTs
-- jasmine from npm for testing
-
-## Steps to Completion
-
-### 1. Plan to Meet Requirements
-
-In this repo there is a `REQUIREMENTS.md` document which outlines what this API needs to supply for the frontend, as well as the agreed upon data shapes to be passed between front and backend. This is much like a document you might come across in real life when building or extending an API.
-
-Your first task is to read the requirements and update the document with the following:
-
-- Determine the RESTful route for each endpoint listed. Add the RESTful route and HTTP verb to the document so that the frontend developer can begin to build their fetch requests.  
-  **Example**: A SHOW route: 'blogs/:id' [GET]
-
-- Design the Postgres database tables based off the data shape requirements. Add to the requirements document the database tables and columns being sure to mark foreign keys.  
-  **Example**: You can format this however you like but these types of information should be provided
-  Table: Books (id:varchar, title:varchar, author:varchar, published_year:varchar, publisher_id:string[foreign key to publishers table], pages:number)
-
-**NOTE** It is important to remember that there might not be a one to one ratio between data shapes and database tables. Data shapes only outline the structure of objects being passed between frontend and API, the database may need multiple tables to store a single shape.
-
-### 2. DB Creation and Migrations
-
-Now that you have the structure of the database outlined, it is time to create the database and migrations. Add the npm packages dotenv and db-migrate that we used in the course and setup your Postgres database. If you get stuck, you can always revisit the database lesson for a reminder.
-
-You must also ensure that any sensitive information is hashed with bcrypt. If any passwords are found in plain text in your application it will not pass.
-
-### 3. Models
-
-Create the models for each database table. The methods in each model should map to the endpoints in `REQUIREMENTS.md`. Remember that these models should all have test suites and mocks.
-
-### 4. Express Handlers
-
-Set up the Express handlers to route incoming requests to the correct model method. Make sure that the endpoints you create match up with the endpoints listed in `REQUIREMENTS.md`. Endpoints must have tests and be CORS enabled.
-
-### 5. JWTs
-
-Add JWT functionality as shown in the course. Make sure that JWTs are required for the routes listed in `REQUIREMENTS.md`.
-
-### 6. QA and `README.md`
-
-Before submitting, make sure that your project is complete with a `README.md`. Your `README.md` must include instructions for setting up and running your project including how you setup, run, and connect to your database.
-
-Before submitting your project, spin it up and test each endpoint. If each one responds with data that matches the data shapes from the `REQUIREMENTS.md`, it is ready for submission!
+## Endpoints
+- All the Endpoints are listed in the `REQUIREMENTS.md` file along with all the actions needed.
