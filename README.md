@@ -34,3 +34,11 @@ ENV=dev
 
 ## Endpoints
 - All the Endpoints are listed in the `REQUIREMENTS.md` file along with all the actions needed.
+
+## Acknowledgements
+
+- db-migrate docs
+- supertest docs
+- cross-env docs
+- Many youtube videos on how docker/docker-compose works
+- Express docs
