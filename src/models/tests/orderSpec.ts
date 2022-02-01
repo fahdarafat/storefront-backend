@@ -3,17 +3,18 @@ import { Order, OrderStore } from '../order';
 const store = new OrderStore;
 
 describe('Order Model', () => {
-    it("Should have an index method", () => {
-        expect(store.index).toBeDefined();
+    it("Index should return empty array", async () => {
+        expect(await store.index()).toBeTruthy();
     });
-    it("Should have a create method", () => {
-        expect(store.create).toBeDefined();
+    it("Should return a created object", async () => {
+        const result = await store.create({ user_id: 1 })
+        expect(result).toEqual({ id: 1, is_complete: false, user_id: ('1' as unknown) as number });
     });
     it("Show method should not return order if it doesn't exist", async () => {
         const result = await store.show(1)
         expect(result).not.toEqual({
             is_complete: true,
-            userID: 1
+            user_id: 1
         });
     })
     it("ShowById should be falsy when given invalid user id", async () => {

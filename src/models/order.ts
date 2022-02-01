@@ -3,7 +3,7 @@ import client from "../database";
 export type Order = {
     id?: number,
     is_complete?: boolean,
-    userID: number | undefined,
+    user_id: number | undefined,
 }
 export class OrderStore {
     async index(): Promise<Order[]> {
@@ -32,7 +32,7 @@ export class OrderStore {
         try {
             const conn = await client.connect();
             const sql = 'INSERT INTO orders (user_id) VALUES ($1) RETURNING *';
-            const result = await conn.query(sql, [order.userID]);
+            const result = await conn.query(sql, [order.user_id]);
             conn.release();
             return result.rows[0];
         } catch (err) {

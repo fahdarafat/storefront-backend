@@ -7,8 +7,12 @@ const store = new ProductStore;
 const products = express.Router();
 
 products.get('/', async (req: express.Request, res: express.Response) => {
-    const products = await store.index();
-    res.status(200).json(products);
+    try {
+        const products = await store.index();
+        res.status(200).json(products);
+    } catch (err) {
+        res.send(err);
+    }
 })
 products.get('/:id', async (req: express.Request, res: express.Response) => {
     const id: number | undefined = parseInt(req.params.id) ? parseInt(req.params.id) : undefined

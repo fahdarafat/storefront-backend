@@ -1,11 +1,11 @@
-import express from 'express'
+import express, { response } from 'express'
 import { Order, OrderStore } from '../models/order'
 import authenticate from '../middleware/authenticate';
 
 const store = new OrderStore;
 const orders = express.Router();
 
-orders.get('/', async (req: express.Request, res: express.Response) => {
+orders.get('/', authenticate, async (req: express.Request, res: express.Response) => {
     try {
         const result = await store.index();
         res.status(200).json(result);
@@ -13,7 +13,7 @@ orders.get('/', async (req: express.Request, res: express.Response) => {
         res.status(400).send(err);
     }
 })
-orders.get('/:id', async (req: express.Request, res: express.Response) => {
+orders.get('/:id', authenticate, async (req: express.Request, res: express.Response) => {
     try {
         const id: Order["id"] = parseInt(req.params.id) ? parseInt(req.params.id) : undefined
         if (id) {
@@ -35,18 +35,23 @@ orders.get('/user/:id', authenticate, async (req: express.Request, res: express.
         res.status(400).send(err);
     }
 })
-orders.post('/', async (req: express.Request, res: express.Response) => {
-    try {
-        const order: Order = {
-            userID: req.body.user_id,
+orders.post('/', authenticate, async (req: express.Request, res: express.Response) => {
+    const id: Order["user_id"] = parseInt(req.params.id) ? parseInt(req.params.id) : undefined
+    if (id) {
+        try {
+            const order: Order = {
+                user_id: id,
+            }
+            const result = await store.create(order);
+            res.status(200).json(result);
+        } catch (err) {
+            res.status(400).send(err)
         }
-        const result = await store.create(order);
-        res.status(200).json(result);
-    } catch (err) {
-        res.status(400).send(err)
+    } else {
+        res.json("user_id must be a number");
     }
 })
-orders.put('/:id/complete', async (req: express.Request, res: express.Response) => {
+orders.put('/:id/complete', authenticate, async (req: express.Request, res: express.Response) => {
     try {
         const id: string = req.params.id;
         const result: Order = await store.completeOrder(id);

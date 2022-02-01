@@ -3,8 +3,9 @@ import { User, UserStore } from "../user";
 const store = new UserStore();
 
 describe("User Model", () => {
-  it("should have an index method", () => {
-    expect(store.index).toBeDefined();
+  it("Index should not return empty array", async () => {
+    const result = await store.index();
+    expect(result.length).toBeGreaterThan(0);
   });
   it("Should create a new user", async () => {
     const user: User = {

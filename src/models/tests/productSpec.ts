@@ -3,8 +3,9 @@ import { Product, ProductStore } from "../product";
 const store = new ProductStore();
 
 describe("Products Model", () => {
-    it("should have a show method", () => {
-        expect(store.show).toBeDefined();
+    it("Index method should return an Array", async () => {
+        const result = await store.index();
+        expect(Array.isArray(result)).toBeTrue();
     });
     it("Create method should create a new product in DB", async () => {
         const product: Product = {

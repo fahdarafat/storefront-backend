@@ -10,16 +10,16 @@ These are the notes from a meeting with the frontend developer that describe wha
 - `localhost:3000/products` [GET]
 - `localhost:3000/products/:id` [GET]
 - `localhost:3000/products` [POST] [Token required]
-- `localhost:3000/products/:id` [Delete]
+- `localhost:3000/products/:id` [Delete] [Token required]
 ### Users
 - `localhost:3000/users` [GET] [Token required]
 - `localhost:3000/users/:id` [GET] [Token required]
 - `localhost:3000/users` [POST] [Token required]
 ### Orders
-- `localhost:3000/orders` [GET]
-- `localhost:3000/orders/:id` [GET]
-- `localhost:3000/orders` [POST]
-- `localhost:3000/orders/:id/complete` [PUT]
+- `localhost:3000/orders` [GET] [Token required]
+- `localhost:3000/orders/:id` [GET] [Token required]
+- `localhost:3000/orders` [POST] [Token required]
+- `localhost:3000/orders/:id/complete` [PUT] [Token required]
 - `localhost:3000/orders/user/:user_id` [GET] [Token required]
 
 #### Products
